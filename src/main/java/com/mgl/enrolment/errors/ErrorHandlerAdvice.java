@@ -1,8 +1,7 @@
-package com.mgl.enrolment.controller;
+package com.mgl.enrolment.errors;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.mgl.enrolment.dto.validation.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -66,5 +65,29 @@ public class ErrorHandlerAdvice {
                     .build();
         }
         return errorsBuilder.fault(fault).build();
+    }
+
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse onNotFoundError(NotFoundException nfe) {
+        return ErrorResponse.builder()
+                .fault(ErrorResponse.Fault.builder()
+                        .message(nfe.getMessage())
+                        .build())
+                .build();
+    }
+
+    @ExceptionHandler(DuplicateEnrolmentException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public ErrorResponse onDuplicateError(DuplicateEnrolmentException de) {
+        return ErrorResponse.builder()
+                .fault(ErrorResponse.Fault.builder()
+                        .message(de.getMessage())
+                        .fieldName(de.getField())
+                        .build())
+                .build();
     }
 }
