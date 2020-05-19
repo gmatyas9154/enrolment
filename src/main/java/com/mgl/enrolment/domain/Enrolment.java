@@ -27,6 +27,10 @@ public class Enrolment {
     @OneToOne(fetch = FetchType.EAGER)
     private IdentityDocument identityDocument;
 
+    @JoinColumn(name = "check_result_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    private CheckResult checkResult;
+
     public enum Status {
         INITIALIZED,
         VERIFIED,

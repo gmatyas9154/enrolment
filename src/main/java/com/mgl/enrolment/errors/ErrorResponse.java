@@ -1,5 +1,6 @@
-package com.mgl.enrolment.dto.validation;
+package com.mgl.enrolment.errors;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.util.List;
@@ -9,12 +10,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrorResponse {
+
     @Singular
     private List<Fault> faults;
 
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Fault {
         @Getter
         private String fieldName;
