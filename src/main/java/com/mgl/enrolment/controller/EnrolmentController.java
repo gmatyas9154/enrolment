@@ -1,7 +1,10 @@
 package com.mgl.enrolment.controller;
 
+import com.mgl.enrolment.domain.CheckResult;
+import com.mgl.enrolment.dto.CheckResultDTO;
 import com.mgl.enrolment.dto.EnrolmentDTO;
 import com.mgl.enrolment.domain.Enrolment;
+import com.mgl.enrolment.service.ClientCheckService;
 import com.mgl.enrolment.service.EnrolmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +24,13 @@ import java.util.stream.Collectors;
 public class EnrolmentController {
 
     private EnrolmentService enrolmentService;
+    private ClientCheckService clientCheckService;
     private ModelMapper modelMapper;
 
     @Autowired
-    public EnrolmentController(EnrolmentService enrolmentService, ModelMapper modelMapper) {
+    public EnrolmentController(EnrolmentService enrolmentService, ClientCheckService clientCheckService, ModelMapper modelMapper) {
         this.enrolmentService = enrolmentService;
+        this.clientCheckService = clientCheckService;
         this.modelMapper = modelMapper;
     }
 
@@ -53,6 +58,12 @@ public class EnrolmentController {
         return maybeEnrolment
                 .map(e -> ResponseEntity.ok(modelMapper.map(e, EnrolmentDTO.class)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping(path = "{enrolmentId}/check")
+    public ResponseEntity<CheckResultDTO> clientCheck(@PathVariable("enrolmentId") Long enrolmentId) {
+        CheckResult checkResult = clientCheckService.checkEnrolment(enrolmentId);
+        return ResponseEntity.ok(modelMapper.map(checkResult, CheckResultDTO.class));
     }
 
 

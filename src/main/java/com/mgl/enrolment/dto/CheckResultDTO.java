@@ -7,28 +7,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EnrolmentDTO {
+public class CheckResultDTO {
+
     private Long id;
-    private StatusDTO status;
 
-    @NotNull
-    @Valid
-    private IdentityDocumentDTO identityDocument;
+    private Boolean validIdDocument;
 
-    private CheckResultDTO checkResult;
+    private Integer creditScore;
 
-    public enum StatusDTO {
-        INITIALIZED,
-        VERIFIED,
-        SIGNED
+    private CreditRisk creditRisk;
+
+    private Boolean existingClient;
+
+    public enum CreditRisk {
+        NO_RISK,
+        MEDIUM_RISK,
+        HIGH_RISK
     }
 }
