@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@ApiModel("Object representing the enrolment")
+@ApiModel(value = "Enrolment", description = "Object representing the enrolment")
 public class EnrolmentDTO {
     @ApiModelProperty(value = "Unique Identifier", notes = "Not accepted on POST")
     private Long id;

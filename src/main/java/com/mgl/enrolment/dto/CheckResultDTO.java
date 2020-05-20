@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@ApiModel("Object describing the result of the enrolment check")
+@ApiModel(description = "Object describing the result of the enrolment check", value = "CheckResult")
 public class CheckResultDTO {
 
     @ApiModelProperty
