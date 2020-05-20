@@ -73,6 +73,7 @@ public class DocumentService {
         newDocument = documentDao.save(newDocument);
 
         dbEnrolment.setDocument(newDocument);
+        dbEnrolment.setStatus(Enrolment.Status.SIGNED);
         enrolmentDao.saveAndFlush(dbEnrolment);
         return newDocument;
     }
