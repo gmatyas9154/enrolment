@@ -35,3 +35,4 @@ local/
 .mvn/
 .DS_Store
 binary_store/
+database/
