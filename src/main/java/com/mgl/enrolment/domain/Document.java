@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
-@Table(name = "document")
+@Table(name = "enrolment_doc")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Document {

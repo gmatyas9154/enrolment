@@ -1,0 +1,92 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="001-Initial-Version" author="Gabor Matyas">
+        <comment>Setting up the initial version of the database</comment>
+        <sql>
+            create table check_result (
+                id bigint not null,
+                credit_risk varchar(255),
+                credit_score integer,
+                existing_client boolean,
+                valid_id_document boolean,
+                primary key (id)
+            );
+
+            create table data_storage (
+                id varchar(255) not null,
+                data BLOB,
+                primary key (id)
+            );
+
+            create table enrolment_doc (
+                id bigint not null,
+                content_url varchar(255),
+                external_id varchar(255),
+                file_name varchar(255),
+                store_type varchar(255),
+                primary key (id)
+            );
+
+            create table enrolment (
+                id bigint not null,
+                status varchar(255),
+                unsigned_pdf_url varchar(255),
+                check_result_id bigint,
+                document_id bigint,
+                identity_document_id bigint,
+                primary key (id)
+            );
+
+            create table identity_document (
+                id bigint not null,
+                address varchar(255),
+                cnp varchar(255),
+                country_code varchar(255),
+                date_of_birth date,
+                document_id varchar(255),
+                document_type varchar(255),
+                expiration_date date,
+                first_name varchar(255),
+                issuing_authority varchar(255),
+                issuing_date date,
+                last_name varchar(255),
+                nationality varchar(255),
+                parent_first_name varchar(255),
+                passport_type varchar(255),
+                place_of_birth varchar(255),
+                sex varchar(255),
+                primary key (id)
+            );
+
+            alter table identity_document
+                add constraint unq_t_parent_name
+                unique (document_type, document_id);
+
+            create sequence hibernate_sequence start with 1 increment by 1;
+
+            alter table enrolment
+                add constraint fk_enrolment_check_result
+                foreign key (check_result_id)
+                references check_result;
+
+
+            alter table enrolment
+                add constraint fk_enrolment_document
+                foreign key (document_id)
+                references enrolment_doc;
+
+            alter table enrolment
+                add constraint fk_enrolment_identity_doc
+                foreign key (identity_document_id)
+                references identity_document;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
