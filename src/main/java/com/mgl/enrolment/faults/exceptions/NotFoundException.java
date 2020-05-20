@@ -1,4 +1,4 @@
-package com.mgl.enrolment.errors;
+package com.mgl.enrolment.faults.exceptions;
 
 public class NotFoundException extends EnrolmentException {
 

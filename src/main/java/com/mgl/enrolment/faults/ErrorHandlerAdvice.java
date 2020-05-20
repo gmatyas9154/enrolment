@@ -1,7 +1,10 @@
-package com.mgl.enrolment.errors;
+package com.mgl.enrolment.faults;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.mgl.enrolment.faults.exceptions.DuplicateEnrolmentException;
+import com.mgl.enrolment.faults.exceptions.IncorrectStateException;
+import com.mgl.enrolment.faults.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -87,6 +90,17 @@ public class ErrorHandlerAdvice {
                 .fault(ErrorResponse.Fault.builder()
                         .message(de.getMessage())
                         .fieldName(de.getField())
+                        .build())
+                .build();
+    }
+
+    @ExceptionHandler(IncorrectStateException.class)
+    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+    @ResponseBody
+    public ErrorResponse onIncorrectStateError(IncorrectStateException ise) {
+        return ErrorResponse.builder()
+                .fault(ErrorResponse.Fault.builder()
+                        .message(ise.getMessage())
                         .build())
                 .build();
     }

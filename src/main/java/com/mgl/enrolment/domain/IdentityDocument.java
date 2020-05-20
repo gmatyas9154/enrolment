@@ -71,7 +71,17 @@ public class IdentityDocument {
     private String passportType;
 
     public enum DocumentType {
-        CI,
-        PASSPORT
+        CI ("Ci"),
+        PASSPORT ("Passport");
+
+        String displayName;
+
+        DocumentType(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
     }
 }
