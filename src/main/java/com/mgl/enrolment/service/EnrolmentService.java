@@ -1,11 +1,10 @@
 package com.mgl.enrolment.service;
 
-import com.mgl.enrolment.dao.CheckResultDao;
 import com.mgl.enrolment.dao.EnrolmentDao;
 import com.mgl.enrolment.dao.IdentityDocumentDao;
 import com.mgl.enrolment.domain.Enrolment;
 import com.mgl.enrolment.domain.IdentityDocument;
-import com.mgl.enrolment.errors.DuplicateEnrolmentException;
+import com.mgl.enrolment.faults.exceptions.DuplicateEnrolmentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -19,13 +18,13 @@ public class EnrolmentService {
 
     private final EnrolmentDao enrolmentDao;
     private final IdentityDocumentDao identityDocumentDao;
-    private final CheckResultDao checkResultDao;
+//    private final CheckResultDao checkResultDao;
+
 
     @Autowired
-    public EnrolmentService(EnrolmentDao enrolmentDao, IdentityDocumentDao identityDocumentDao, CheckResultDao checkResultDao) {
+    public EnrolmentService(EnrolmentDao enrolmentDao, IdentityDocumentDao identityDocumentDao) {
         this.enrolmentDao = enrolmentDao;
         this.identityDocumentDao = identityDocumentDao;
-        this.checkResultDao = checkResultDao;
     }
 
     public Optional<Enrolment> fetchById(Long enrolmentId) {
@@ -56,6 +55,5 @@ public class EnrolmentService {
                     .documentId(e.getIdentityDocument().getDocumentId())
                     .build())
             .build());
-
 
 }

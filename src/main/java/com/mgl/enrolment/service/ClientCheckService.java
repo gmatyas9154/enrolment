@@ -5,11 +5,12 @@ import com.mgl.enrolment.dao.EnrolmentDao;
 import com.mgl.enrolment.domain.CheckResult;
 import com.mgl.enrolment.domain.Enrolment;
 import com.mgl.enrolment.dto.external.CreditScoreDTO;
-import com.mgl.enrolment.errors.EnrolmentException;
+import com.mgl.enrolment.faults.exceptions.NotFoundException;
 import com.mgl.enrolment.service.external.CreditScoreService;
 import com.mgl.enrolment.service.external.ExistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -37,7 +38,7 @@ public class ClientCheckService {
         Optional<Enrolment> maybeEnrolment = enrolmentDao.findById(enrolmentId);
 
         if (maybeEnrolment.isEmpty()) {
-            throw new EnrolmentException("Cannot run check operation: Enrolment not found!");
+            throw new NotFoundException("Cannot run check operation: Enrolment not found!");
         }
 
         Enrolment enrolment = maybeEnrolment.get();
@@ -55,8 +56,16 @@ public class ClientCheckService {
         CheckResult dbCheckResult = checkResultDao.save(checkResult);
         enrolment.setCheckResult(dbCheckResult);
 
+        // set verified, generate download url
         enrolment.setStatus(Enrolment.Status.VERIFIED);
+        String unsignedPdfUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("api/enrolment/")
+                .path(enrolmentId.toString())
+                .path("/file/unsigned")
+                .toUriString();
+        enrolment.setUnsignedPdfUrl(unsignedPdfUri);
         enrolmentDao.save(enrolment);
+
         if (oldCheckResult != null) {
             checkResultDao.delete(oldCheckResult);
         }

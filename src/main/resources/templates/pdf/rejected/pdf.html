@@ -1,0 +1,92 @@
+<!doctype HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="UTF-8" content="application/pdf">
+    <style type="text/css">
+        @page {
+            margin-top: 3.3cm;
+            margin-left: 2cm;
+            margin-right: 2cm;
+            margin-bottom: 3.3cm;
+            size: A4 portrait;
+        }
+        .doc-body {
+            text-align: left;
+            text-indent: 1.5cm;
+        }
+        .third-width {
+            width: 33%;
+        }
+        .center {
+            text-align: center;
+        }
+        .signature {
+            border: 0;
+            border-bottom: 1px solid #000;
+            width: 4cm;
+        }
+        .signature-table {
+            padding: 5px;
+            height: 64px;
+            border: 0px;
+            width: 18cm;
+        }
+    </style>
+    <title>Enrolment for {{Name}} Rejected</title>
+</head>
+<body>
+<h1 class="center">Enrolment Rejected</h1>
+<p class="doc-body">The undersigned {{Name}} , identified by document type {{documentType}}
+    with serial {{documentId}} acknowledges that his/her application to the Enrolment POC has been
+    rejected, for the following reasons:</p>
+<div class="doc-body">
+<ul>
+    {{#documentExpired}}
+    <li>The applicants identity document expired at {{expirationDate}}</li>
+    {{/documentExpired}}
+    {{#badCredit}}
+    <li>The applicant is rejected because of his high risk credit score: {{creditScore}}</li>
+    {{/badCredit}}
+    {{#isDuplicate}}
+    <li>The applicant is already enrolled in the system</li>
+    {{/isDuplicate}}
+</ul>
+</div>
+<p class="doc-body">&nbsp;</p>
+<p class="doc-body">&nbsp;</p>
+<p class="doc-body">&nbsp;</p>
+<p class="doc-body">&nbsp;</p>
+<p class="doc-body">&nbsp;</p>
+<p class="doc-body">&nbsp;</p>
+<p class="doc-body">&nbsp;</p>
+<p class="doc-body">&nbsp;</p>
+<table class="signature-table" summary="Signatures Table">
+    <tbody>
+    <tr>
+        <td class="third-width">Date:</td>
+        <td class="third-width">&nbsp;</td>
+        <td class="third-width">Date:</td>
+    </tr>
+    <tr>
+        <td class="third-width"><input type="text" class="signature" /></td>
+        <td class="third-width">&nbsp;</td>
+        <td class="third-width"><input type="text" class="signature" /></td>
+    </tr>
+    <tr>
+        <td class="third-width">&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="third-width">Employee Signature</td>
+        <td class="third-width">&nbsp;</td>
+        <td class="third-width">Client Signature</td>
+    </tr>
+    <tr>
+        <td class="third-width"><input type="text" class="signature" /></td>
+        <td class="third-width">&nbsp;</td>
+        <td class="third-width"><input type="text" class="signature" /></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

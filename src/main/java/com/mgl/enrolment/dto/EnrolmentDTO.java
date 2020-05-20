@@ -26,6 +26,10 @@ public class EnrolmentDTO {
 
     private CheckResultDTO checkResult;
 
+    private String unsignedPdfUrl;
+
+    private DocumentDTO document;
+
     public enum StatusDTO {
         INITIALIZED,
         VERIFIED,

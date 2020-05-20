@@ -31,6 +31,13 @@ public class Enrolment {
     @OneToOne(fetch = FetchType.EAGER)
     private CheckResult checkResult;
 
+    @Column(name = "unsigned_pdf_url")
+    private String unsignedPdfUrl;
+
+    @JoinColumn(name = "document_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    private Document document;
+
     public enum Status {
         INITIALIZED,
         VERIFIED,

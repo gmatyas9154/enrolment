@@ -1,4 +1,4 @@
-package com.mgl.enrolment.errors;
+package com.mgl.enrolment.faults;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
