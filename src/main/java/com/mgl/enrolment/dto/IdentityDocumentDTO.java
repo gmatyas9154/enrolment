@@ -21,7 +21,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@ApiModel("Object describing the identity document")
+@ApiModel(description = "Object describing the identity document", value = "IdentityDocument")
 public class IdentityDocumentDTO {
 
     @ApiModelProperty

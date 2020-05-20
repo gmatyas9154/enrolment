@@ -17,15 +17,18 @@ Creates a new enrolment, only identity document should be specified
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Body**|**enrolmentDTO**  <br>*required*|enrolmentDTO|[Enrolment](#object-representing-the-enrolment)|
+|**Body**|**enrolmentDTO**  <br>*required*|enrolmentDTO|[Enrolment](#enrolment)|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**201**|Enrolment successfully created|[Enrolment](#object-representing-the-enrolment)|
+|**200**|OK|[Enrolment](#enrolment)|
+|**201**|Enrolment successfully created|[Enrolment](#enrolment)|
 |**400**|Submitted data failed validation|No Content|
+|**401**|Unauthorized|No Content|
+|**403**|Forbidden|No Content|
 |**404**|Not Found|No Content|
 |**500**|Unexpected error|No Content|
 
@@ -37,10 +40,13 @@ Creates a new enrolment, only identity document should be specified
 
 #### Produces
 
+* `\*/*`
 * `application/json`
 
 
 #### Tags
+
+* Enrolment Controller
 
 
 <a name="fetchallenrolmentsusingget"></a>
@@ -58,7 +64,7 @@ Retrieves all the enrolments in the system
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|Enrolments retrieved|< [Enrolment](#object-representing-the-enrolment) > array|
+|**200**|Enrolments retrieved|< [Enrolment](#enrolment) > array|
 |**404**|No enrolments found|No Content|
 |**500**|Unexpected error|No Content|
 
@@ -88,14 +94,14 @@ Retrieves a specific enrolment, identified by the path parameter
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Path**|**enrolmentId**  <br>*required*|enrolmentId|integer (int64)|
+|**Path**|**enrolmentId**  <br>*required*|enrolmentId|long|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|Enrolments retrieved|[Enrolment](#object-representing-the-enrolment)|
+|**200**|Enrolments retrieved|[Enrolment](#enrolment)|
 |**404**|Enrolment with specified ID not found|No Content|
 |**500**|Unexpected error|No Content|
 
@@ -125,14 +131,14 @@ Initiate the checking of the enrolment which verifies ID document validity, cred
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Path**|**enrolmentId**  <br>*required*|enrolmentId|integer (int64)|
+|**Path**|**enrolmentId**  <br>*required*|enrolmentId|long|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|Enrolment check successfully completed|[CheckResult](#object-describing-the-result-of-the-enrolment-check)|
+|**200**|Enrolment check successfully completed|[CheckResult](#checkresult)|
 |**404**|Enrolment with specified ID not found|No Content|
 |**500**|Unexpected error|No Content|
 
@@ -167,7 +173,7 @@ Upload the signed enrolment or denial document
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Path**|**enrolmentId**  <br>*required*|enrolmentId|integer (int64)|
+|**Path**|**enrolmentId**  <br>*required*|enrolmentId|long|
 |**FormData**|**file**  <br>*required*|file|file|
 
 
@@ -175,14 +181,13 @@ Upload the signed enrolment or denial document
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**201**|Document is uploaded|[Document](#object-that-represents-an-uploaded-document)|
+|**201**|Document is uploaded|[Document](#document)|
 |**404**|Enrolment with specified ID not found|No Content|
 |**500**|Unexpected error|No Content|
 
 
 #### Consumes
 
-* `application/pdf`
 * `multipart/form-data`
 
 
@@ -212,7 +217,7 @@ Download the signed copy of the enrolment or denial document
 |Type|Name|Description|Schema|
 |---|---|---|---|
 |**Path**|**Enrolment Id**  <br>*required*|Enrolment unique identifier|string|
-|**Path**|**enrolmentId**  <br>*required*|enrolmentId|integer (int64)|
+|**Path**|**enrolmentId**  <br>*required*|enrolmentId|long|
 
 
 #### Responses
@@ -226,7 +231,6 @@ Download the signed copy of the enrolment or denial document
 
 #### Produces
 
-* `\*/*`
 * `application/pdf`
 
 
@@ -250,7 +254,7 @@ Download either the enrolment document or the denial document, specifying the re
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Path**|**enrolmentId**  <br>*required*|enrolmentId|integer (int64)|
+|**Path**|**enrolmentId**  <br>*required*|enrolmentId|long|
 
 
 #### Responses

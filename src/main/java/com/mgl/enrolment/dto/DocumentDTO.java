@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel("Object that represents an uploaded document")
+@ApiModel(description = "Object that represents an uploaded document", value = "Document")
 public class DocumentDTO {
 
     @ApiModelProperty
