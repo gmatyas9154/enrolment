@@ -34,3 +34,4 @@ build/
 local/
 .mvn/
 .DS_Store
+binary_store/
