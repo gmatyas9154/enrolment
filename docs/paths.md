@@ -17,19 +17,16 @@ Creates a new enrolment, only identity document should be specified
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Body**|**enrolmentDTO**  <br>*required*|enrolmentDTO|[Enrolment](#enrolment)|
+|**Body**|**enrolment**  <br>*required*|enrolmentDTO|[Enrolment](definitions.md#enrolment)|
 
 
 #### Responses
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|OK|[Enrolment](#enrolment)|
-|**201**|Enrolment successfully created|[Enrolment](#enrolment)|
+|**200**|OK|[Enrolment](definitions.md#enrolment)|
+|**201**|Enrolment successfully created|[Enrolment](definitions.md#enrolment)|
 |**400**|Submitted data failed validation|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
-|**404**|Not Found|No Content|
 |**500**|Unexpected error|No Content|
 
 
@@ -64,7 +61,7 @@ Retrieves all the enrolments in the system
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|Enrolments retrieved|< [Enrolment](#enrolment) > array|
+|**200**|Enrolments retrieved|< [Enrolment](definitions.md#enrolment) > array|
 |**404**|No enrolments found|No Content|
 |**500**|Unexpected error|No Content|
 
@@ -101,7 +98,7 @@ Retrieves a specific enrolment, identified by the path parameter
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|Enrolments retrieved|[Enrolment](#enrolment)|
+|**200**|Enrolments retrieved|[Enrolment](definitions.md#enrolment)|
 |**404**|Enrolment with specified ID not found|No Content|
 |**500**|Unexpected error|No Content|
 
@@ -138,7 +135,7 @@ Initiate the checking of the enrolment which verifies ID document validity, cred
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**200**|Enrolment check successfully completed|[CheckResult](#checkresult)|
+|**200**|Enrolment check successfully completed|[CheckResult](definitions.md#checkresult)|
 |**404**|Enrolment with specified ID not found|No Content|
 |**500**|Unexpected error|No Content|
 
@@ -181,7 +178,7 @@ Upload the signed enrolment or denial document
 
 |HTTP Code|Description|Schema|
 |---|---|---|
-|**201**|Document is uploaded|[Document](#document)|
+|**201**|Document is uploaded|[Document](definitions.md#document)|
 |**404**|Enrolment with specified ID not found|No Content|
 |**500**|Unexpected error|No Content|
 
@@ -216,8 +213,7 @@ Download the signed copy of the enrolment or denial document
 
 |Type|Name|Description|Schema|
 |---|---|---|---|
-|**Path**|**Enrolment Id**  <br>*required*|Enrolment unique identifier|string|
-|**Path**|**enrolmentId**  <br>*required*|enrolmentId|long|
+|**Path**|**Enrolment Id**  <br>*required*|Enrolment unique identifier|long|
 
 
 #### Responses

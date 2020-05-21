@@ -3,7 +3,6 @@ package com.mgl.enrolment.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mgl.enrolment.domain.IdentityDocument;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -31,7 +30,7 @@ public class IdentityDocumentDTO {
             notes = "Type of ID document, like passport, or CI",
             allowableValues = "CI,PASSPORT")
     @NotNull(message = "Document Type is mandatory")
-    private IdentityDocument.DocumentType documentType;
+    private DocumentType documentType;
 
     @ApiModelProperty(required = true,
             notes = "Unique identifier of the document, like passport number, or CI serial number")
