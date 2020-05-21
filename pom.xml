@@ -15,7 +15,7 @@
 	<description>Simple Enrolment API</description>
 
 	<properties>
-		<java.version>14</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -71,6 +71,11 @@
 			<version>2.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
 		<!-- ######### Utilities ########### -->
 		<dependency>
 			<groupId>net.sf.jtidy</groupId>
@@ -120,6 +125,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
