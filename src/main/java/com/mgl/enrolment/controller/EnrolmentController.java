@@ -185,9 +185,6 @@ public class EnrolmentController {
             @ApiResponse(code = 404, message = "Enrolment with specified ID not found"),
             @ApiResponse(code = 500, message = "Unexpected error")
     })
-    @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "Enrolment Id", type = "Numeric", value = "Enrolment unique identifier", example = "2", paramType = "path")
-    })
     @GetMapping(path = "{enrolmentId}/document")
     public ResponseEntity<Resource> downloadDocument(@PathVariable("enrolmentId") Long enrolmentId) {
         Document document = documentService.getDocumentFileContent(enrolmentId);
